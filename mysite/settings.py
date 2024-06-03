@@ -80,10 +80,20 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'py_django_web',    # Replace 'your_database_name' with your actual database name
+        'USER': 'root',   # Replace 'your_mysql_username' with your MySQL username
+        'PASSWORD': '',  # Replace 'your_mysql_password' with your MySQL password
+        'HOST': 'localhost',             # Replace 'localhost' with your MySQL host address
+        'PORT': '3306',                  # Replace '3306' with your MySQL port number
     }
 }
 
@@ -131,3 +141,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.CustomUser'
+

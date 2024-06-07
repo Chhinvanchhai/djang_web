@@ -86,14 +86,25 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+print("--------------------------------------log-----------------")
+print(os.environ.get('DB_NAME'))
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'py_django_web',    # Replace 'your_database_name' with your actual database name
+    #     'USER': 'root',   # Replace 'your_mysql_username' with your MySQL username
+    #     'PASSWORD': '',  # Replace 'your_mysql_password' with your MySQL password
+    #     'HOST': 'localhost',             # Replace 'localhost' with your MySQL host address
+    #     'PORT': '3306',                  # Replace '3306' with your MySQL port number
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'py_django_web',    # Replace 'your_database_name' with your actual database name
-        'USER': 'root',   # Replace 'your_mysql_username' with your MySQL username
-        'PASSWORD': '',  # Replace 'your_mysql_password' with your MySQL password
-        'HOST': 'localhost',             # Replace 'localhost' with your MySQL host address
-        'PORT': '3306',                  # Replace '3306' with your MySQL port number
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
 

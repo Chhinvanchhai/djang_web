@@ -6,7 +6,7 @@
 <h1>{% if object %}Edit{% else %}Add{% endif %} Product</h1>
 
 {% load form_filters %}
-<form method="post" novalidate>
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="mb-3">
         <label for="id_name" class="form-label">Name</label>
@@ -45,6 +45,14 @@
         {{ form.category|add_class:"form-select" }}
         {% for error in form.category.errors %}
         <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+    </div>
+      <!-- Image Upload Field -->
+      <div class="mb-3">
+        <label for="id_image" class="form-label">Image</label>
+        {{ form.image|add_class:"form-control" }}
+        {% for error in form.image.errors %}
+            <div class="text-danger">{{ error }}</div>
         {% endfor %}
     </div>
 

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Categories</h1>
+<a href="{% url 'product:category_create' %}" class="btn btn-primary mb-3">Add Category</a>
+<ul>
+    {% for category in object_list %}
+        <li>
+            <a href="{% url 'product:category_detail' category.pk %}">{{ category.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

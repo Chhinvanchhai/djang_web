@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import sys
 import os
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # BASE_DIR = Path(__file__).resolve().parent.parent
@@ -90,36 +91,19 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-print("--------------------------------------log-----------------")
-print(os.environ.get('DB_NAME'))
+print("--------------------------------------log db config-----------------")
+print(config('DATABASE_NAME'))
+print("--------------------------------------end log db-----------------")
 DATABASES = {
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'web_site',    # Replace 'your_database_name' with your actual database name
-        'USER': 'root',   # Replace 'your_mysql_username' with your MySQL username
-        'PASSWORD': '12345678',  # Replace 'your_mysql_password' with your MySQL password
-        'HOST': 'localhost',             # Replace 'localhost' with your MySQL host address
-        'PORT': '3306',                  # Replace '3306' with your MySQL port number
+        'NAME': config('DATABASE_NAME'),
+        'USER': config('DATABASE_USER'),
+        'PASSWORD': config('DATABASE_PASSWORD'),
+        'HOST': config('DATABASE_HOST', default='127.0.0.1'),
+        'PORT': config('DATABASE_PORT', default='3306'),
     }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': os.getenv('DATABASE_NAME'),
-    #     'USER': os.getenv('DATABASE_USER'),
-    #     'PASSWORD': os.getenv('DATABASE_PASSWORD'),
-    #     'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-    #     'PORT': os.getenv('DATABASE_PORT', '3306'),
-    # }
-
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': os.environ.get('DB_NAME'),
-    #     'USER': os.environ.get('DB_USER'),
-    #     'PASSWORD': os.environ.get('DB_PASSWORD'),
-    #     'HOST': os.environ.get('DB_HOST'),
-    #     'PORT': os.environ.get('DB_PORT', '3306'),
-    # }
-
 }
 
 

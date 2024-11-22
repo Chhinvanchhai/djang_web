@@ -7,6 +7,7 @@
 <p>Email: {{ user.email }}</p>
 <p>Age: {{ user.age }}</p>
 <p>Bio: {{ user.bio }}</p>
+<br/>
 <a href="{% url 'user:user_update' user.pk %}">Edit</a>
 <a href="{% url 'user:user_list' %}">Back to User List</a>
 {% endblock %}

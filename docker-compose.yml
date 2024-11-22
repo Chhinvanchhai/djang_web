@@ -1,37 +1,37 @@
 version: '3.9'
-
 services:
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_DATABASE: py_django_web
-      MYSQL_ROOT_PASSWORD: ""
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-
   web:
     build: .
+    image: web_site:1.0
+    container_name: "web_site"
     command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
     volumes:
       - .:/app
     ports:
       - "8000:8000"
-    depends_on:
-      - db
+    # depends_on:
+    #   - db
     environment:
-      - DB_NAME=py_django_web
-      - DB_USER=root
-      - DB_PASSWORD=
-      - DB_HOST=db
-      - DB_PORT=3306
+      - DATABASE_NAME=web_site
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=12345678
+      - DATABASE_HOST=172.23.38.45
+      - DATABASE_PORT=3306
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "db"]
       interval: 10s
       timeout: 5s
       retries: 3
+  # db:
+  #   image: mysql:8
+  #   environment:
+  #     MYSQL_DATABASE: web_site
+  #     MYSQL_ROOT_PASSWORD: ""
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  #   volumes:
+  #     - mysql_data:/var/lib/mysql
+  #   ports:
+  #     - "3307:3306" 
 
 volumes:
   mysql_data:

@@ -13,8 +13,15 @@
 <p>{{ object.description }}</p>
 <p>Price: ${{ object.price }}</p>
 <p>Stock: {{ object.stock }}</p>
-<a href="{% url 'product:product_update' object.pk %}">Edit</a>
-<a href="{% url 'product:product_delete' object.pk %}">Delete</a>
-<a href="{% url 'product:product_list' %}">Back to List</a>
-
+<p>Type: {{object.category}}</p>
+<button class="cc">Click</button>
+<br/>
+<a class="btn btn-info" href="{% url 'product:product_update' object.pk %}">Edit</a>
+<a class="btn btn-danger" href="{% url 'product:product_delete' object.pk %}">Delete</a>
+<a class="btn btn-secondary" href="{% url 'product:product_list' %}">Back to List</a>
+<script>
+    $(".cc").click(function(){
+        alert("click")
+    })
+</script>
 {% endblock %}
